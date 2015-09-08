@@ -1,5 +1,4 @@
-﻿using ExAs.Assertions;
-using ExAs.Results;
+﻿using ExAs.Results;
 using ExAs.Utils;
 using NUnit.Framework;
 
@@ -24,7 +23,7 @@ namespace ExAs.Api
             var result = naruto.Evaluate(
                 n => n.IsNotNull());
             Assert.IsTrue(result.succeeded);
-            Assert.AreEqual("Ninja: Name = 'Naruto' (expected: not null)", result.PrintLog());
+            Assert.AreEqual("Ninja: Name = 'Naruto' (expected: not null)", result.log);
         }
 
         [Test]
@@ -34,7 +33,7 @@ namespace ExAs.Api
             var result = ninja.Evaluate(
                 n => n.IsNotNull());
             Assert.IsFalse(result.succeeded);
-            Assert.AreEqual("null (expected: not null)", result.PrintLog());
+            Assert.AreEqual("null (expected: not null)", result.log);
         }
 
         [Test]
@@ -44,7 +43,7 @@ namespace ExAs.Api
             var result = ninja.Evaluate(
                 n => n.IsNull());
             Assert.IsTrue(result.succeeded);
-            Assert.AreEqual("null (expected: null)", result.PrintLog());
+            Assert.AreEqual("null (expected: null)", result.log);
         }
 
         [Test]
@@ -53,7 +52,7 @@ namespace ExAs.Api
             var result = naruto.Evaluate(
                 n => n.IsNull());
             Assert.IsFalse(result.succeeded);
-            Assert.AreEqual("Ninja: Name = 'Naruto' (expected: null)", result.PrintLog());
+            Assert.AreEqual("Ninja: Name = 'Naruto' (expected: null)", result.log);
         }
 
         [Test]
@@ -61,12 +60,12 @@ namespace ExAs.Api
         {
             var ninja = new Ninja("Naruto", 12);
 
-            ObjectAssertionResult result = ninja.Evaluate(
+            AssertionResult result = ninja.Evaluate(
                 n => n.Property(x => x.Name).EqualTo("Naruto"));
 
             Assert.IsTrue(result.succeeded);
             Assert.AreEqual("Ninja: Name = 'Naruto' (expected: 'Naruto')",
-                            result.PrintLog());
+                            result.log);
         }
 
         [Test]
@@ -74,12 +73,12 @@ namespace ExAs.Api
         {
             var ninja = new Ninja("Naruto", 12);
 
-            ObjectAssertionResult result = ninja.Evaluate(
+            AssertionResult result = ninja.Evaluate(
                 n => n.Property(x => x.Age).EqualTo(12));
 
             Assert.IsTrue(result.succeeded);
             Assert.AreEqual("Ninja: Age = 12 (expected: 12)",
-                            result.PrintLog());
+                            result.log);
         }
     }
 }

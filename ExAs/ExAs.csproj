@@ -37,6 +37,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Results\AssertionResult.cs" />
+    <Compile Include="Results\IntermediateResultPrint.cs" />
+    <Compile Include="Results\NewObjectAssertionResult.cs" />
     <Compile Include="Results\ObjectAssertionResult.cs" />
     <Compile Include="Assertions\IAssertValue.cs" />
     <Compile Include="Assertions\ObjectAssertions\IsNotNullAssertion.cs" />
@@ -50,6 +53,7 @@
     <Compile Include="Assertions\ObjectAssertion.cs" />
     <Compile Include="Assertions\IAssertOnProperty.cs" />
     <Compile Include="Assertions\PropertyAssertions\Strings\IsEmptyAssertion.cs" />
+    <Compile Include="Results\ResultsInterpreter.cs" />
     <Compile Include="Results\ValueAssertionResult.cs" />
     <Compile Include="ExAsExtensions.cs" />
     <Compile Include="ObjectAssertionExtensions.cs" />

@@ -13,8 +13,9 @@ namespace ExAs.Assertions
 
         public ValueAssertionResult AssertValue(T actual)
         {
-            ObjectAssertionResult result = assert.Assert(actual);
-            return new ValueAssertionResult(result.succeeded, result.log, result.expectation);
+            NewObjectAssertionResult result = assert.NewAssert(actual);
+            var intermediateResultPrint = ResultsInterpreter.Interpret(result);
+            return new ValueAssertionResult(intermediateResultPrint.succeeded, intermediateResultPrint.actualValue, intermediateResultPrint.expectedValue);
         }
     }
 }

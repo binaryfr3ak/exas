@@ -14,42 +14,42 @@ namespace ExAs.Api
         public void IsNull_WithNullNinja_ShouldPass()
         {
             var nullNinja = new Ninja(name: null);
-            ObjectAssertionResult result = nullNinja.Evaluate(n => n.Property(x => x.Name).IsNull());
+            AssertionResult result = nullNinja.Evaluate(n => n.Property(x => x.Name).IsNull());
             Assert.IsTrue(result.succeeded);
             Assert.AreEqual(
                 "Ninja: Name = null (expected: null)",
-                result.PrintLog());
+                result.log);
         }
 
         [Test]
         public void IsNull_WithNaruto_ShouldFail()
         {
-            ObjectAssertionResult result = naruto.Evaluate(n => n.Property(x => x.Name).IsNull());
+            AssertionResult result = naruto.Evaluate(n => n.Property(x => x.Name).IsNull());
             Assert.IsFalse(result.succeeded);
             Assert.AreEqual(
                 "Ninja: Name = 'Naruto' (expected: null)",
-                result.PrintLog());
+                result.log);
         }
 
         [Test]
         public void IsEmpty_WithEmptyNinja_ShouldPass()
         {
             var ninja = new Ninja("");
-            ObjectAssertionResult result = ninja.Evaluate(n => n.Property(x => x.Name).IsEmpty());
+            AssertionResult result = ninja.Evaluate(n => n.Property(x => x.Name).IsEmpty());
             Assert.IsTrue(result.succeeded);
             Assert.AreEqual(
                 "Ninja: Name = '' (expected: empty string)",
-                result.PrintLog());
+                result.log);
         }
 
         [Test]
         public void IsEmpty_WithNaruto_ShouldFail()
         {
-            ObjectAssertionResult result = naruto.Evaluate(n => n.Property(x => x.Name).IsEmpty());
+            AssertionResult result = naruto.Evaluate(n => n.Property(x => x.Name).IsEmpty());
             Assert.IsFalse(result.succeeded);
             Assert.AreEqual(
                 "Ninja: Name = 'Naruto' (expected: empty string)",
-                result.PrintLog());
+                result.log);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace ExAs.Assertions
             var assertion = Ninja().IsNull();
             ObjectAssertionResult result = assertion.Assert(null);
             Assert.IsTrue(result.succeeded);
-            Assert.AreEqual("null (expected: null)", result.PrintLog());
+            Assert.AreEqual("null (expected: null)", result.log);
         }
 
         [Test]
@@ -22,7 +22,7 @@ namespace ExAs.Assertions
             var assertion = Ninja().IsNull();
             ObjectAssertionResult result = assertion.Assert(new Ninja());
             Assert.IsFalse(result.succeeded);
-            Assert.AreEqual("Ninja: Name = 'Naruto' (expected: null)", result.PrintLog());
+            Assert.AreEqual("Ninja: Name = 'Naruto' (expected: null)", result.log);
         }
 
         private static ObjectAssertion<Ninja> Ninja()

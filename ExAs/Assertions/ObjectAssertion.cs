@@ -35,6 +35,21 @@ namespace ExAs.Assertions
             propertyAssertions.Add(propertyAssertion);
         }
 
+        public NewObjectAssertionResult NewAssert(T actual)
+        {
+            ValueAssertionResult isNotNullResult = null;
+            ValueAssertionResult isNullResult = null;
+         
+            if (isNotNullAssertion != null)
+                isNotNullResult = isNotNullAssertion.AssertValue(actual);
+            if (isNullAssertion != null)
+                isNullResult = isNullAssertion.AssertValue(actual);
+
+            IReadOnlyCollection<PropertyAssertionResult> propertyAssertionResults = propertyAssertions.Map(r => r.Assert(actual));
+
+            return new NewObjectAssertionResult(TypeName(), isNullResult, isNotNullResult, propertyAssertionResults);
+        }
+
         public ObjectAssertionResult Assert(T actual)
         {
             if (isNotNullAssertion != null)

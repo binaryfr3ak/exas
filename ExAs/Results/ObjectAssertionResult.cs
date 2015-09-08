@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using ExAs.Utils;
-using ToText;
+﻿using ToText;
 
 namespace ExAs.Results
 {
@@ -16,16 +13,6 @@ namespace ExAs.Results
             this.succeeded = succeeded;
             this.log = log;
             this.expectation = expectation;
-        }
-
-        public string PrintLog()
-        {
-            string[] logLines = log.SplitLines();
-            string[] expectationLines = expectation.SplitLines();
-            int longestLogLine = logLines.MaxOrDefault(s => s.Length);
-            IReadOnlyList<string> resultingLogLines = logLines.Map(expectationLines, 
-                                                                   (al, el) => al.FillUpWithSpacesToLength(longestLogLine).Add(" ").Add(el));
-            return string.Join(Environment.NewLine, resultingLogLines);
         }
 
         public override string ToString()

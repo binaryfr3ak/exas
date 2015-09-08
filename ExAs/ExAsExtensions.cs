@@ -6,10 +6,11 @@ namespace ExAs
 {
     public static class ExAsExtensions
     {
-        public static ObjectAssertionResult Evaluate<T>(this T instance, Func<ObjectAssertion<T>, ObjectAssertion<T>> assertion)
+        public static AssertionResult Evaluate<T>(this T instance, Func<ObjectAssertion<T>, ObjectAssertion<T>> assertion)
         {
             ObjectAssertion<T> exAssertion = assertion(new ObjectAssertion<T>());
-            return exAssertion.Assert(instance);
+            NewObjectAssertionResult result = exAssertion.NewAssert(instance);
+            return new AssertionResult(ResultsInterpreter.IsSuccess(result), ResultsInterpreter.PrintOut(result));
         }
     }
 }
