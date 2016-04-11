@@ -1,10 +1,13 @@
-﻿namespace ExAs.Utils
+﻿using ExAs.Utils.StringExtensions;
+using static ExAs.Utils.StringExtensions.StringFormattingFunctions;
+
+namespace ExAs.Utils
 {
     public static class ComposeLog
     {
-        public static string Expected(string expectedValue)
+        public static string Expected(string expectationString)
         {
-            return "(expected: ".Add(expectedValue).Add(")");
+            return $"{HangingIndent("(expected: ", expectationString)})";
         }
     }
 }

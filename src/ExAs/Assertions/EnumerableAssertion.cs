@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using ExAs.Results;
 using ExAs.Utils;
+using ExAs.Utils.StringExtensions;
+using static ExAs.Utils.StringExtensions.StringFormattingFunctions;
 
 namespace ExAs.Assertions
 {
@@ -13,11 +15,11 @@ namespace ExAs.Assertions
             this.itemAssertion = itemAssertion;
         }
 
-        public ObjectAssertionResult AssertEnumerable(IEnumerable<TElement> enumerable)
+        public Result AssertEnumerable(IEnumerable<TElement> enumerable)
         {
             var valueAssertionResult = itemAssertion.AssertValue(enumerable);
-            string log = StringFunctions.HangingIndent("Enumerable<".Add(typeof(TElement).Name).Add(">: "), valueAssertionResult.actualValueString);
-            return new ObjectAssertionResult(valueAssertionResult.succeeded, log, valueAssertionResult.expectationString);
+            string log = HangingIndent("Enumerable<".Add(typeof(TElement).Name).Add(">: "), valueAssertionResult.actualValueString);
+            return new Result(valueAssertionResult.succeeded, log, valueAssertionResult.expectationString);
         }
     }
 }

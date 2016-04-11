@@ -7,8 +7,8 @@ using NUnit.Framework;
 
 namespace ExAs.Api
 {
-    using ExAs.Results;
-    using ExAs.Utils;
+    using global::ExAs.Results;
+    using global::ExAs.Utils;
 
     [TestFixture]
     public class DoubleAssertionFeature
@@ -19,44 +19,44 @@ namespace ExAs.Api
         [Test]
         public void IsEqualTo_Expect38_4_Get38_4_ShouldPass()
         {
-            ObjectAssertionResult result = padavanNaruto.Evaluate(n => n.Member(x => x.SkillValue).IsEqualTo(38.4));
+            Result result = padavanNaruto.Evaluate(n => n.Member(x => x.SkillValue).IsEqualTo(38.4));
             result.ExAssert(r => r.p(x => x.succeeded).IsTrue()
-                                  .p(x => x.log).IsEqualTo("Ninja: ( )SkillValue = 38.4")
+                                  .p(x => x.actual).IsEqualTo("Ninja: ( )SkillValue = 38.4")
                                   .p(x => x.expectation).IsEqualTo("(expected: 38.4)"));
         }
 
         [Test]
         public void IsEqualTo_Expect38_4_Get13_8_ShouldFail()
         {
-            ObjectAssertionResult result = padavanNaruto.Evaluate(n => n.p(x => x.SkillValue).IsEqualTo(13.8));
+            Result result = padavanNaruto.Evaluate(n => n.p(x => x.SkillValue).IsEqualTo(13.8));
             result.ExAssert(r => r.p(x => x.succeeded).IsFalse()
-                                  .p(x => x.log).IsEqualTo("Ninja: (X)SkillValue = 38.4")
+                                  .p(x => x.actual).IsEqualTo("Ninja: (X)SkillValue = 38.4")
                                   .p(x => x.expectation).IsEqualTo("(expected: 13.8)"));
         }
 
         [Test]
-        public void IsSmallerThan_Expected43_2_Get38_4_ShouldPass()
+        public void IsLessThan_Expected43_2_Get38_4_ShouldPass()
         {
-            ObjectAssertionResult result = padavanNaruto.Evaluate(n => n.p(x => x.SkillValue).IsSmallerThan(43.2));
+            Result result = padavanNaruto.Evaluate(n => n.p(x => x.SkillValue).IsLessThan(43.2));
             result.ExAssert(r => r.p(x => x.succeeded).IsTrue()
-                                  .p(x => x.log).IsEqualTo("Ninja: ( )SkillValue = 38.4")
+                                  .p(x => x.actual).IsEqualTo("Ninja: ( )SkillValue = 38.4")
                                   .p(x => x.expectation).IsEqualTo("(expected: smaller than 43.2)"));
         }
 
         [Test]
-        public void IsSmallerThan_Expected99_2_Get99_7_ShouldFail()
+        public void IsLessThan_Expected99_2_Get99_7_ShouldFail()
         {
-            ObjectAssertionResult result = skilledNaruto.Evaluate(n => n.p(x => x.SkillValue).IsSmallerThan(99.2));
+            Result result = skilledNaruto.Evaluate(n => n.p(x => x.SkillValue).IsLessThan(99.2));
             result.ExAssert(r => r.p(x => x.succeeded).IsFalse()
-                                  .p(x => x.log).IsEqualTo("Ninja: (X)SkillValue = 99.7")
+                                  .p(x => x.actual).IsEqualTo("Ninja: (X)SkillValue = 99.7")
                                   .p(x => x.expectation).IsEqualTo("(expected: smaller than 99.2)"));
         }
 
         [Test]
-        public void IsBiggerThan_Expected37_8_Get38_8_ShouldPass()
+        public void IsGreaterThan_Expected37_8_Get38_8_ShouldPass()
         {
             // Act
-            var result = padavanNaruto.Evaluate(n => n.Member(x => x.SkillValue).IsBiggerThan(37.8));
+            var result = padavanNaruto.Evaluate(n => n.Member(x => x.SkillValue).IsGreaterThan(37.8));
 
             // Assert
             result.ExAssert(r => r.IsNotNull()
@@ -65,10 +65,10 @@ namespace ExAs.Api
         }
 
         [Test]
-        public void IsBiggerThan_Expected100_1_Get99_7_ShouldFail()
+        public void IsGreaterThan_Expected100_1_Get99_7_ShouldFail()
         {
             // Act
-            var result = skilledNaruto.Evaluate(n => n.Member(x => x.SkillValue).IsBiggerThan(100.1));
+            var result = skilledNaruto.Evaluate(n => n.Member(x => x.SkillValue).IsGreaterThan(100.1));
 
             // Assert
             result.ExAssert(r => r.IsNotNull()

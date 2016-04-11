@@ -1,10 +1,16 @@
 ﻿using ExAs.Assertions;
+using ExAs.Assertions.MemberAssertions;
 using ExAs.Assertions.MemberAssertions.Strings;
 
 namespace ExAs
 {
     public static class StringAssertions
     {
+        public static IAssert<T> IsNull<T>(this IAssertMember<T, string> member)
+        {
+            return member.SetAssertion(new IsNullAssertion());
+        } 
+
         public static IAssert<T> IsEqualTo<T>(this IAssertMember<T, string> member, string expected)
         {
             return member.SetAssertion(new EqualAssertion(expected));
@@ -24,5 +30,35 @@ namespace ExAs
         {
             return member.SetAssertion(new HasLengthAssertion(expectedLength));
         }
+
+        public static IAssert<T> StartsWith<T>(this IAssertMember<T, string> member, string expectedStart)
+        {
+            return member.SetAssertion(new StartsWithAssertion(expectedStart));
+        }
+
+        public static IAssert<T> EndsWith<T>(this IAssertMember<T, string> member, string expectedEnd)
+        {
+            return member.SetAssertion(new EndsWithAssertion(expectedEnd));
+        }
+
+        public static IAssert<T> DoesntStartWith<T>(this IAssertMember<T, string> member, string expected)
+        {
+            return member.SetAssertion(new StartsNotWithAssertion(expected));
+        }
+
+        public static IAssert<T> DoesntEndWith<T>(this IAssertMember<T, string> member, string expected)
+        {
+            return member.SetAssertion(new EndsNotWithAssertion(expected));
+        }
+
+        public static IAssert<T> Contains<T>(this IAssertMember<T, string> member, string expected)
+        {
+            return member.SetAssertion(new ContainsAssertion(expected));
+        }
+
+        public static IAssert<T> DoesntContain<T>(this IAssertMember<T, string> member, string expected)
+        {
+            return member.SetAssertion(new ContainsNotAssertion(expected));
+        } 
     }
 }

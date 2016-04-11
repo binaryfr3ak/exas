@@ -1,7 +1,9 @@
 ﻿using System;
 using ExAs.Utils;
+using ExAs.Utils.StringExtensions;
 using NUnit.Framework;
 using static ExAs.Utils.Creation.CreateCities;
+using static ExAs.Utils.Creation.CreateNinjas;
 using static ExAs.Utils.Dates;
 
 namespace ExAs.Api.Enumerables
@@ -27,8 +29,8 @@ namespace ExAs.Api.Enumerables
         public void ExpectingStandardDayDojo_OnCityWithOldAndStandardDayDojo_ShouldSucceed()
         {
             // arrange
-            var city = new City(new Dojo(new Ninja(), new DateTime(1515, 11, 15)),
-                                new Dojo(new Ninja(), Dates.StandardDay()));
+            var city = new City(new Dojo(Naruto(), new DateTime(1515, 11, 15)),
+                                new Dojo(Naruto(), Dates.StandardDay()));
 
             // act
             var result = city.Evaluate(

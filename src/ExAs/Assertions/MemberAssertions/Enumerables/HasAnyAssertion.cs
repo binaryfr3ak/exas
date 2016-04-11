@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ExAs.Results;
 using ExAs.Utils;
+using ExAs.Utils.StringExtensions;
 using ExAs.Utils.SystemExtensions;
 
 namespace ExAs.Assertions.MemberAssertions.Enumerables
@@ -32,13 +33,13 @@ namespace ExAs.Assertions.MemberAssertions.Enumerables
                     actualList.ToValueString(),
                     expectation);
 
-            IReadOnlyCollection<ObjectAssertionResult> results = actualList.Map(item => childAssertion.Assert(item));
+            IReadOnlyCollection<Result> results = actualList.Map(item => childAssertion.Assert(item));
             int amountOfSucceededResults = results.Count(r => r.succeeded);
             return new ValueAssertionResult(
                 amountOfSucceededResults > 0, 
                 string.Join(Environment.NewLine,
                             amountOfSucceededResults.Matches()
-                                .Cons(results.Select(r => r.log))),
+                                .Cons(results.Select(r => r.actual))),
                 string.Join(Environment.NewLine,
                             expectation
                                 .Cons(results.Select(r => r.expectation))));

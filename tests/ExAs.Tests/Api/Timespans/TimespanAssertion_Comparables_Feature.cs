@@ -7,26 +7,26 @@ namespace ExAs.Api.Timespans
     public class TimespanAssertion_Comparables_Feature
     {
         [Test]
-        public void IsSmaller_Expecting5Seconds_On4Seconds_ShouldSucceed()
+        public void IsLessThan_Expecting5Seconds_On4Seconds_ShouldSucceed()
         {
             // arrange
             var ninja = new SleepyNinja(4.Seconds());
 
             // act
-            var result = ninja.Evaluate(n => n.Member(x => x.awake).IsSmallerThan(5.Seconds()));
+            var result = ninja.Evaluate(n => n.Member(x => x.awake).IsLessThan(5.Seconds()));
 
             // assert
             result.ExAssert(r => r.Fullfills(true, "SleepyNinja: ( )awake = 00:00:04", "(expected: smaller than 00:00:05)"));
         }
         
         [Test]
-        public void IsBigger_Expecting6Seconds_On6Seconds_ShouldFail()
+        public void IsGreaterThan_Expecting6Seconds_On6Seconds_ShouldFail()
         {
             // arrange
             var ninja = new SleepyNinja(6.Seconds());
 
             // act
-            var result = ninja.Evaluate(n => n.Member(x => x.awake).IsBiggerThan(6.Seconds()));
+            var result = ninja.Evaluate(n => n.Member(x => x.awake).IsGreaterThan(6.Seconds()));
 
             // assert
             result.ExAssert(r => r.Fullfills(false, "SleepyNinja: (X)awake = 00:00:06", "(expected: bigger than 00:00:06)"));

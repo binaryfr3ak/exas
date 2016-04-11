@@ -1,12 +1,13 @@
 ﻿using System;
 using ExAs.Results;
 using ExAs.Utils;
+using ExAs.Utils.StringExtensions;
 
 namespace ExAs
 {
     public class ExtendedAssertionException : Exception
     {
-        public ExtendedAssertionException(ObjectAssertionResult result)
+        public ExtendedAssertionException(Result result)
             : base(Pretty(result.PrintLog()))
         {
         }

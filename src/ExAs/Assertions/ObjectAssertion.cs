@@ -4,7 +4,9 @@ using System.Linq;
 using ExAs.Assertions.ObjectAssertions;
 using ExAs.Results;
 using ExAs.Utils;
+using ExAs.Utils.StringExtensions;
 using ExAs.Utils.SystemExtensions;
+using static ExAs.Utils.StringExtensions.StringFormattingFunctions;
 
 namespace ExAs.Assertions
 {
@@ -36,24 +38,24 @@ namespace ExAs.Assertions
             memberAssertions.Add(memberAssertion);
         }
 
-        public ObjectAssertionResult Assert(T actual)
+        public Result Assert(T actual)
         {
             if (isNotNullAssertion != null)
             {
                 ValueAssertionResult isNotNullResult = isNotNullAssertion.AssertValue(actual);
                 if (!isNotNullResult.succeeded)
-                    return new ObjectAssertionResult(isNotNullResult.succeeded, isNotNullResult.actualValueString, isNotNullResult.expectationString);
+                    return new Result(isNotNullResult.succeeded, isNotNullResult.actualValueString, isNotNullResult.expectationString);
                 if (!memberAssertions.Any())
-                    return new ObjectAssertionResult(true, isNotNullResult.actualValueString, isNotNullResult.expectationString);
+                    return new Result(true, isNotNullResult.actualValueString, isNotNullResult.expectationString);
             }
             if (isNullAssertion != null)
             {
                 ValueAssertionResult isNullResult = isNullAssertion.AssertValue(actual);
-                return new ObjectAssertionResult(isNullResult.succeeded, isNullResult.actualValueString, isNullResult.expectationString);
+                return new Result(isNullResult.succeeded, isNullResult.actualValueString, isNullResult.expectationString);
             }
 
             if (!memberAssertions.Any())
-                return new ObjectAssertionResult(true, "no assertions", "-");
+                return new Result(true, "no assertions", "-");
 
             IReadOnlyCollection<MemberAssertionResult> results = memberAssertions.Map(assertion => assertion.Assert(actual));
             int lengthOfLongestMember = results.Max(x => x.memberName.Length);
@@ -62,10 +64,10 @@ namespace ExAs.Assertions
                 {
                     string failureIndicator = r.childResult.succeeded ? "( )" : "(X)";
                     string memberString = failureIndicator.Add(r.memberName.FillUpWithSpacesToLength(lengthOfLongestMember)).Add(" = ");
-                    return StringFunctions.HangingIndent(memberString, r.childResult.actualValueString);
+                    return HangingIndent(memberString, r.childResult.actualValueString);
                 });
-            string log = StringFunctions.HangingIndent(TypeName(), string.Join(Environment.NewLine, memberResults));
-            return new ObjectAssertionResult(results.All(r => r.childResult.succeeded), log, string.Join(Environment.NewLine, results.Select(r => r.childResult.expectationString)));
+            string log = HangingIndent(TypeName(), string.Join(Environment.NewLine, memberResults));
+            return new Result(results.All(r => r.childResult.succeeded), log, string.Join(Environment.NewLine, results.Select(r => r.childResult.expectationString)));
         }
 
         private static string TypeName()

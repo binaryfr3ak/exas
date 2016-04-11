@@ -6,16 +6,16 @@ namespace ExAs
 {
     public static class ComparableAssertions
     {
-        public static IAssert<T> IsSmallerThan<T, TMember>(this IAssertMember<T, TMember> member, TMember expected)
+        public static IAssert<T> IsLessThan<T, TMember>(this IAssertMember<T, TMember> member, TMember expected)
             where TMember : IComparable<TMember>
         {
-            return member.SetAssertion(new IsSmallerAssertion<TMember>(expected));
+            return member.SetAssertion(new LessThanAssertion<TMember>(expected));
         }
 
-        public static IAssert<T> IsBiggerThan<T, TMember>(this IAssertMember<T, TMember> member, TMember expected)
+        public static IAssert<T> IsGreaterThan<T, TMember>(this IAssertMember<T, TMember> member, TMember expected)
             where TMember : IComparable<TMember>
         {
-            return member.SetAssertion(new IsBiggerAssertion<TMember>(expected));
+            return member.SetAssertion(new GreaterThanAssertion<TMember>(expected));
         }
 
         public static IAssert<T> IsInRange<T, TMember>(this IAssertMember<T, TMember> member, TMember min, TMember max)

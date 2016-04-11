@@ -41,6 +41,8 @@
     <Compile Include="Assertions\MemberAssertions\Booleans\IsTrueAssertion.cs" />
     <Compile Include="Assertions\MemberAssertions\DateTimes\CloseToAssertion.cs" />
     <Compile Include="Assertions\MemberAssertions\DateTimes\SameDayAssertion.cs" />
+    <Compile Include="Assertions\MemberAssertions\Enumerables\ContainsAssertion.cs" />
+    <Compile Include="Assertions\MemberAssertions\Enumerables\ContainsNotAssertion.cs" />
     <Compile Include="Assertions\MemberAssertions\Enumerables\HasAnyAssertion.cs" />
     <Compile Include="Assertions\MemberAssertions\Enumerables\HasCountAssertion.cs" />
     <Compile Include="Assertions\MemberAssertions\Enumerables\HasNoneAssertion.cs" />
@@ -49,14 +51,21 @@
     <Compile Include="Assertions\MemberAssertions\Enumerables\OutputExtensions.cs" />
     <Compile Include="Assertions\MemberAssertions\NotEqualAssertion.cs" />
     <Compile Include="Assertions\MemberAssertions\Numbers\InRangeAssertion.cs" />
-    <Compile Include="Assertions\MemberAssertions\Numbers\IsBiggerAssertion.cs" />
-    <Compile Include="Assertions\MemberAssertions\Numbers\IsSmallerAssertion.cs" />
+    <Compile Include="Assertions\MemberAssertions\Numbers\GreaterThanAssertion.cs" />
+    <Compile Include="Assertions\MemberAssertions\Numbers\LessThanAssertion.cs" />
     <Compile Include="Assertions\MemberAssertions\NullableAssertionAdapter.cs" />
     <Compile Include="Assertions\MemberAssertions\OfTypeAssertion.cs" />
+    <Compile Include="Assertions\MemberAssertions\Strings\ContainsAssertion.cs" />
+    <Compile Include="Assertions\MemberAssertions\Strings\ContainsNotAssertion.cs" />
+    <Compile Include="Assertions\MemberAssertions\Strings\EndsNotWithAssertion.cs" />
+    <Compile Include="Assertions\MemberAssertions\Strings\IsNullAssertion.cs" />
+    <Compile Include="Assertions\MemberAssertions\Strings\StartsNotWithAssertion.cs" />
+    <Compile Include="Assertions\MemberAssertions\Strings\EndsWithAssertion.cs" />
     <Compile Include="Assertions\MemberAssertions\Strings\EqualAssertion.cs" />
     <Compile Include="Assertions\MemberAssertions\Strings\HasLengthAssertion.cs" />
     <Compile Include="Assertions\MemberAssertions\Strings\IsEmptyAssertion.cs" />
     <Compile Include="Assertions\MemberAssertions\Strings\IsNotEmptyAssertion.cs" />
+    <Compile Include="Assertions\MemberAssertions\Strings\StartsWithAssertion.cs" />
     <Compile Include="Assertions\MemberAssertions\Timespans\IsCloseToAssertion.cs" />
     <Compile Include="Assertions\MemberAssertions\Timespans\IsNegativeAssertion.cs" />
     <Compile Include="Assertions\MemberAssertions\Timespans\IsPositiveAssertion.cs" />
@@ -68,7 +77,7 @@
     <Compile Include="NullableBooleanAssertions.cs" />
     <Compile Include="NullableIntegerAssertions.cs" />
     <Compile Include="ReadOnlyCollectionAssertions.cs" />
-    <Compile Include="Results\ObjectAssertionResult.cs" />
+    <Compile Include="Results\Result.cs" />
     <Compile Include="Assertions\IAssertValue.cs" />
     <Compile Include="Assertions\ObjectAssertions\IsNotNullAssertion.cs" />
     <Compile Include="Assertions\ObjectAssertions\IsNullAssertion.cs" />
@@ -81,7 +90,7 @@
     <Compile Include="Assertions\ObjectAssertion.cs" />
     <Compile Include="Assertions\IAssertMemberOf.cs" />
     <Compile Include="Results\ValueAssertionResult.cs" />
-    <Compile Include="ExAsExtensions.cs" />
+    <Compile Include="ExAs.cs" />
     <Compile Include="ObjectAssertionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Version.cs" />
@@ -91,8 +100,11 @@
     <Compile Include="TimespanAssertions.cs" />
     <Compile Include="Utils\ComposeLog.cs" />
     <Compile Include="Utils\MemberExpressionFunctions.cs" />
-    <Compile Include="Utils\StringFunctions.cs" />
+    <Compile Include="Utils\StringExtensions\StringConcatinationFunctions.cs" />
+    <Compile Include="Utils\StringExtensions\StringFormattingFunctions.cs" />
+    <Compile Include="Utils\StringExtensions\StringFunctions.cs" />
     <Compile Include="Utils\SystemExtensions\ClassicEnumerableExtensions.cs" />
+    <Compile Include="Utils\SystemExtensions\EnumerableExtensions.cs" />
     <Compile Include="Utils\SystemExtensions\SystemFunctions.cs" />
     <Compile Include="Utils\TimeSpanFunctions.cs" />
   </ItemGroup>

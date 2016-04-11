@@ -1,10 +1,17 @@
-﻿namespace ExAs.Utils.Creation
+﻿using ExAs.Utils.StringExtensions;
+
+namespace ExAs.Utils.Creation
 {
     public static class CreateNinjas
     {
         public static Ninja Naruto()
         {
             return new Ninja();
+        }
+
+        public static Ninja Kakashi()
+        {
+            return new Ninja("Kakashi", 26);
         }
 
         public static Ninja MultilinedNarutoUzumaki()
@@ -21,6 +28,16 @@
         public static Ninja NullNinja()
         {
             return new Ninja(name:null);
+        }
+
+        public static WeaponedNinja WeaponlessNinja()
+        {
+            return new WeaponedNinja();
+        }
+
+        public static WeaponedNinja NinjaWithTwoWeapons()
+        {
+            return new WeaponedNinja("Sword", "Shuriken");
         }
     }
 }

@@ -1,56 +1,56 @@
 ﻿using ExAs.Results;
 using ExAs.Utils;
 using NUnit.Framework;
+using static ExAs.Utils.Creation.CreateNinjas;
 
 namespace ExAs.Api
 {
     [TestFixture]
     public class IntegerAssertionFeature
     {
-        private readonly Ninja naruto = new Ninja();
         private readonly Ninja oldNaruto = new Ninja(age:93);
 
         [Test]
         public void IsEqualTo_Expect12_Get12_ShouldPass()
         {
-            ObjectAssertionResult result = naruto.Evaluate(n => n.Member(x => x.Age).IsEqualTo(12));
+            Result result = Naruto().Evaluate(n => n.Member(x => x.Age).IsEqualTo(12));
             result.ExAssert(r => r.p(x => x.succeeded)  .IsTrue()
-                                  .p(x => x.log)        .IsEqualTo("Ninja: ( )Age = 12")
+                                  .p(x => x.actual)        .IsEqualTo("Ninja: ( )Age = 12")
                                   .p(x => x.expectation).IsEqualTo("(expected: 12)"));
         }
 
         [Test]
         public void IsEqualTo_Expect13_Get12_ShouldFail()
         {
-            ObjectAssertionResult result = naruto.Evaluate(n => n.p(x => x.Age).IsEqualTo(13));
+            Result result = Naruto().Evaluate(n => n.p(x => x.Age).IsEqualTo(13));
             result.ExAssert(r => r.p(x => x.succeeded)  .IsFalse()
-                                  .p(x => x.log)        .IsEqualTo("Ninja: (X)Age = 12")
+                                  .p(x => x.actual)        .IsEqualTo("Ninja: (X)Age = 12")
                                   .p(x => x.expectation).IsEqualTo("(expected: 13)"));
         }
 
         [Test]
-        public void IsSmallerThan_Expected13_Get12_ShouldPass()
+        public void IsLessThan_Expected13_Get12_ShouldPass()
         {
-            ObjectAssertionResult result = naruto.Evaluate(n => n.p(x => x.Age).IsSmallerThan(13));
+            Result result = Naruto().Evaluate(n => n.p(x => x.Age).IsLessThan(13));
             result.ExAssert(r => r.p(x => x.succeeded)  .IsTrue()
-                                  .p(x => x.log)        .IsEqualTo("Ninja: ( )Age = 12")
+                                  .p(x => x.actual)        .IsEqualTo("Ninja: ( )Age = 12")
                                   .p(x => x.expectation).IsEqualTo("(expected: smaller than 13)"));
         }
 
         [Test]
-        public void IsSmallerThan_Expected13_Get13_ShouldFail()
+        public void IsLessThan_Expected13_Get13_ShouldFail()
         {
-            ObjectAssertionResult result = oldNaruto.Evaluate(n => n.p(x => x.Age).IsSmallerThan(13));
+            Result result = oldNaruto.Evaluate(n => n.p(x => x.Age).IsLessThan(13));
             result.ExAssert(r => r.p(x => x.succeeded)  .IsFalse()
-                                  .p(x => x.log)        .IsEqualTo("Ninja: (X)Age = 93")
+                                  .p(x => x.actual)        .IsEqualTo("Ninja: (X)Age = 93")
                                   .p(x => x.expectation).IsEqualTo("(expected: smaller than 13)"));
         }
 
         [Test]
-        public void IsBiggerThan_Expected2_Get12_ShouldPass()
+        public void IsGreaterThan_Expected2_Get12_ShouldPass()
         {
             // Act
-            var result = naruto.Evaluate(n => n.Member(x => x.Age).IsBiggerThan(2));
+            var result = Naruto().Evaluate(n => n.Member(x => x.Age).IsGreaterThan(2));
 
             // Assert
             result.ExAssert(r => r.IsNotNull()
@@ -59,10 +59,10 @@ namespace ExAs.Api
         }
 
         [Test]
-        public void IsBiggerThan_Expected100_Get93_ShouldFail()
+        public void IsGreaterThan_Expected100_Get93_ShouldFail()
         {
             // Act
-            var result = oldNaruto.Evaluate(n => n.Member(x => x.Age).IsBiggerThan(100));
+            var result = oldNaruto.Evaluate(n => n.Member(x => x.Age).IsGreaterThan(100));
 
             // Assert
             result.ExAssert(r => r.IsNotNull()
@@ -74,7 +74,7 @@ namespace ExAs.Api
         public void IsInRange_ExpectedIn9And12_Get12_ShouldPass()
         {
             // Act
-            var result = naruto.Evaluate(n => n.p(x => x.Age).IsInRange(9, 12));
+            var result = Naruto().Evaluate(n => n.p(x => x.Age).IsInRange(9, 12));
 
             // Arrange
             result.ExAssert(r => r.IsNotNull()
@@ -86,7 +86,7 @@ namespace ExAs.Api
         public void IsInRange_ExpectedIn12And15_Get12_ShouldPass()
         {
             // Act
-            var result = naruto.Evaluate(n => n.p(x => x.Age).IsInRange(12, 15));
+            var result = Naruto().Evaluate(n => n.p(x => x.Age).IsInRange(12, 15));
 
             // Arrange
             result.ExAssert(r => r.IsNotNull()
@@ -98,7 +98,7 @@ namespace ExAs.Api
         public void IsInRange_ExpectedIn9And11_Get12_ShouldFail()
         {
             // Act
-            var result = naruto.Evaluate(n => n.p(x => x.Age).IsInRange(9, 11));
+            var result = Naruto().Evaluate(n => n.p(x => x.Age).IsInRange(9, 11));
 
             // Arrange
             result.ExAssert(r => r.IsNotNull()
@@ -110,7 +110,7 @@ namespace ExAs.Api
         public void IsInRange_ExpectedIn13And25_Get12_ShouldFail()
         {
             // Act
-            var result = naruto.Evaluate(n => n.p(x => x.Age).IsInRange(13, 25));
+            var result = Naruto().Evaluate(n => n.p(x => x.Age).IsInRange(13, 25));
 
             // Arrange
             result.ExAssert(r => r.IsNotNull()

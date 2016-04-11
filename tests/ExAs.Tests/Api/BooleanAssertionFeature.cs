@@ -1,20 +1,27 @@
-﻿using ExAs.Utils;
+﻿using ExAs.Results;
+using ExAs.Utils;
 using NUnit.Framework;
+using static ExAs.Utils.Creation.CreateNinjas;
+using static ExAs.ExAs;
 
 namespace ExAs.Api
 {
     [TestFixture]
     public class BooleanAssertionFeature
     {
-        private readonly City cityWithDojo = new City(new Dojo(new Ninja(), Dates.StandardDay()));
+        private readonly City cityWithDojo = new City(new Dojo(Naruto(), Dates.StandardDay()));
         private readonly City cityWithoutDojo = new City();
 
         [Test]
         public void CityHasDojosIsTrue_OnCityWithDojos_ShouldPass()
         {
+            // act
             var result = cityWithDojo.Evaluate(c => c.Member(x => x.HasDojo).IsTrue());
-            Assert.AreEqual("City: ( )HasDojo = True (expected: True)", result.PrintLog());
-            Assert.IsTrue(result.succeeded);
+
+            // assert
+            ExAssert(result, Has<Result>().Member(x => x.succeeded).IsTrue()
+                                          .Member(x => x.actual)   .IsEqualTo("City: ( )HasDojo = True")
+                                          .Member(x => x.expectation).IsEqualTo(ComposeLog.Expected("True")));
         }
 
         [Test]

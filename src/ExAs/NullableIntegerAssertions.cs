@@ -17,14 +17,14 @@ namespace ExAs
             return member.SetAssertion(new IsNotNullAssertion<int?>());
         }
 
-        public static IAssert<T> IsSmallerThan<T>(this IAssertMember<T, int?> member, int expected)
+        public static IAssert<T> IsLessThan<T>(this IAssertMember<T, int?> member, int expected)
         {
-            return member.SetAssertion(new NullableAssertionAdapter<int>(new IsSmallerAssertion<int>(expected)));
+            return member.SetAssertion(new NullableAssertionAdapter<int>(new LessThanAssertion<int>(expected)));
         }
 
-        public static IAssert<T> IsBiggerThan<T>(this IAssertMember<T, int?> member, int expected)
+        public static IAssert<T> IsGreaterThan<T>(this IAssertMember<T, int?> member, int expected)
         {
-            return member.SetAssertion(new NullableAssertionAdapter<int>(new IsBiggerAssertion<int>(expected)));
+            return member.SetAssertion(new NullableAssertionAdapter<int>(new GreaterThanAssertion<int>(expected)));
         }
 
         public static IAssert<T> IsInRange<T>(this IAssertMember<T, int?> member, int min, int max)

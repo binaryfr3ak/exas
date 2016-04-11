@@ -1,7 +1,9 @@
 ﻿using System;
 using ExAs.Results;
 using ExAs.Utils;
+using ExAs.Utils.StringExtensions;
 using NUnit.Framework;
+using static ExAs.Utils.Creation.CreateNinjas;
 
 namespace ExAs.Api
 {
@@ -11,7 +13,7 @@ namespace ExAs.Api
     [TestFixture]
     public class MultipleObjectsAssertionFeature
     {
-        private readonly Dojo narutosDojo = new Dojo(new Ninja(), new DateTime(1515, 11, 1));
+        private readonly Dojo narutosDojo = new Dojo(Naruto(), new DateTime(1515, 11, 1));
 
         [Test]
         public void WithNarutosDojo_AndValidAssertions_ShouldPass()
@@ -20,7 +22,7 @@ namespace ExAs.Api
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("de");
 
             // act
-            ObjectAssertionResult result = narutosDojo.Evaluate(
+            Result result = narutosDojo.Evaluate(
                 d => d.Member(x => x.Master).Fulfills(n => n.Member(x => x.Name).IsEqualTo("Naruto")
                                                                  .Member(x => x.Age) .IsEqualTo(12))
                       .Member(x => x.Founded).IsEqualTo(new DateTime(1515, 11, 1)));
